@@ -54,7 +54,7 @@ def test_unchanged_source_needs_no_model():
     entry = json.loads(c.get_claim("audit/2026"))
     assert entry["last_result"] == "unchanged"
     assert entry["status"] == "supported"
-    assert gl.prompts == []                      # byte-identical: decided deterministically
+    assert gl.prompts == []  # byte-identical: decided deterministically
     assert json.loads(c.list_alerts("audit/2026")) == []
 
 

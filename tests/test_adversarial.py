@@ -64,7 +64,7 @@ def test_non_boolean_output_reverts_and_keeps_the_stored_status(reply):
     with pytest.raises(Exception, match="JSON boolean"):
         c.verify("audit/2026")
     entry = json.loads(c.get_claim("audit/2026"))
-    assert entry["status"] == "supported"        # unchanged, not silently broken or re-blessed
+    assert entry["status"] == "supported"  # unchanged, not silently broken or re-blessed
     assert entry["baseline_version"] == 1
     assert json.loads(c.list_alerts("audit/2026")) == []
 
@@ -130,7 +130,7 @@ def test_injection_in_the_page_is_fenced_and_flagged():
 
     prompt = gl.prompts[-1]
     assert prompt.count("<<<BEGIN_UNTRUSTED_DATA>>>") == 2
-    assert prompt.count("<<<END_UNTRUSTED_DATA>>>") == 2     # the page's own fence is scrubbed
+    assert prompt.count("<<<END_UNTRUSTED_DATA>>>") == 2  # the page's own fence is scrubbed
     assert "[fence-removed]" in prompt
     assert "typical of prompt injection" in prompt
 
@@ -165,7 +165,8 @@ def test_a_retraction_buried_deep_in_the_page_reaches_the_model():
     filler = "Navigation. Cookie notice. Related reports. " * 150
     c = _registered()
     gl.page = (
-        "Bridge audit 2026. " + filler
+        "Bridge audit 2026. "
+        + filler
         + "CORRECTION: the 12,400 ETH reserve figure was wrong and this audit is withdrawn. "
         + filler
     )
